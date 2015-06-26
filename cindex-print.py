@@ -17,7 +17,7 @@ import sys
 import os
 import itertools
 import clang.cindex
-from mako.template import Template
+#from mako.template import Template
 
 def get_annotations(node):
     return [c.displayname for c in node.get_children()
@@ -80,18 +80,18 @@ def main():
     translation_unit = index.parse(sys.argv[1], ['-x', 'objective-c', '-D__CODE_GENERATOR__'])
 
     classes = build_classes(translation_unit.cursor)
-    tpl = Template(filename='bind.mako')
-    rendered = tpl.render(
-                          classes=classes,
-                          module_name='CodegenExample',
-                          include_file=sys.argv[1])
+    #tpl = Template(filename='bind.mako')
+    #rendered = tpl.render(
+    #                      classes=classes,
+    #                      module_name='CodegenExample',
+    #                      include_file=sys.argv[1])
 
-    OUTPUT_DIR = 'generated'
+#OUTPUT_DIR = 'generated'
 
-    if not os.path.isdir(OUTPUT_DIR): os.mkdir(OUTPUT_DIR)
+#   if not os.path.isdir(OUTPUT_DIR): os.mkdir(OUTPUT_DIR)
 
-    with open("generated/{}.bind.cc".format(sys.argv[1]), "w") as f:
-        f.write(rendered)
+#   with open("generated/{}.bind.cc".format(sys.argv[1]), "w") as f:
+#       f.write(rendered)
 
 
 if __name__ == '__main__':
